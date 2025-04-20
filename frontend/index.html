@@ -44,7 +44,7 @@
         setIsLoading(true);
         setError('');
         try {
-          const response = await axios.post('BACKEND_URL/api/generate-pix', { amount });
+          const response = await axios.post(https://pix-generator-1bsv.onrender.com/api/generate-pix', { amount });
           setPixData(response.data);
         } catch (err) {
           setError('Falha ao gerar Pix. Tente novamente.');
