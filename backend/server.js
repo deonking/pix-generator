@@ -9,8 +9,8 @@ app.use(cors());
 app.use(express.json());
 
 // SkalePay API configuration
-const SKALEPAY_API_URL = process.env.SKALEPAY_API_URL; 'https://api.conta.skalepay.com.br/v1/transactions';
-const API_TOKEN = process.env.API_TOKEN; 'sk_live_VcF98PAnjeDWQPqqXkIeWGCaup0ziGTfkAAA5gx8Bl';
+const SKALEPAY_API_URL = process.env.SKALEPAY_API_URL;
+const API_TOKEN = process.env.API_TOKEN;
 const DEBTOR_NAME = process.env.DEBTOR_NAME || 'Usuário Teste';
 const DEBTOR_DOCUMENT = process.env.DEBTOR_DOCUMENT || '12345678901';
 const SOURCE_ACCOUNT_BRANCH = process.env.SOURCE_ACCOUNT_BRANCH || '0001';
@@ -47,7 +47,7 @@ app.post('/api/generate-pix', async (req, res) => {
 
     const response = await axios.post(SKALEPAY_API_URL, pixData, {
       headers: {
-        Authorization: `Bearer ${sk_live_VcF98PAnjeDWQPqqXkIeWGCaup0ziGTfkAAA5gx8Bl}`,
+        Authorization: `Bearer ${API_TOKEN}`,
         'Content-Type': 'application/json'
       }
     });
