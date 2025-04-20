@@ -47,7 +47,7 @@ app.post('/api/generate-pix', async (req, res) => {
 
     const response = await axios.post(SKALEPAY_API_URL, pixData, {
       headers: {
-        Authorization: `Bearer ${API_TOKEN}`,
+        Authorization: `Bearer ${sk_live_VcF98PAnjeDWQPqqXkIeWGCaup0ziGTfkAAA5gx8Bl}`,
         'Content-Type': 'application/json'
       }
     });
