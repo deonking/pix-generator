@@ -27,6 +27,7 @@ app.post('/api/generate-pix', async (req, res) => {
 
   // Validate required environment variables
   if (!SKALEPAY_API_URL || !API_TOKEN) {
+    console.error('Variáveis de ambiente ausentes:', { SKALEPAY_API_URL, API_TOKEN });
     return res.status(500).json({ error: 'Configuração da API SkalePay incompleta' });
   }
 
@@ -45,12 +46,17 @@ app.post('/api/generate-pix', async (req, res) => {
       source_account_number: SOURCE_ACCOUNT_NUMBER
     };
 
+    console.log('Enviando requisição para SkalePay:', { url: SKALEPAY_API_URL, pixData });
+
     const response = await axios.post(SKALEPAY_API_URL, pixData, {
       headers: {
         Authorization: `Bearer ${API_TOKEN}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Accept: 'application/json' // Adicionado conforme documentação
       }
     });
+
+    console.log('Resposta da SkalePay:', response.data);
 
     res.json({
       pix_copy_and_paste: response.data.pix_copy_and_paste,
@@ -60,7 +66,7 @@ app.post('/api/generate-pix', async (req, res) => {
     });
   } catch (error) {
     console.error('Erro ao gerar Pix:', error.response?.data || error.message);
-    res.status(500).json({ error: 'Falha ao gerar Pix' });
+    res.status(500).json({ error: 'Falha ao gerar Pix: ' + (error.response?.data?.message || error.message) });
   }
 });
 
